@@ -36,6 +36,7 @@ public class Main implements Runnable{
 		janela.setTitle(nome); //definir nome da janela 
 		janela.setSize(WIDTH, HEIGHT); //definir tamanho da janela
 		janela.setResizable(false); //false = nao permitir mudar resolução da janela
+		janela.setExtendedState(janela.getExtendedState() | JFrame.MAXIMIZED_BOTH);//colocar janela maximizada
 		janela.setLocationRelativeTo(null); //centrar janela no ecra
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //fechar corretamente a janela
 		janela.setVisible(true);
