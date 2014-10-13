@@ -1,0 +1,28 @@
+Ideias para o Ninja Islands (nome não permanente):
+
+Personagem
+ - Personagem é um ninja;
+ - Movimento andar para os lados;
+ - Movimentos Saltar;
+ - Ninja com espada na mão apertando tecla W;
+ - Golpe simples através da Barra de Espaço;
+ - Movimentos com as setas;
+ 
+Cenário
+ - 3 ilhas; <-
+ - Algumas agrupadas por pontes de madeira; <-
+ - Fundo com o céu azul, sol brilhante sem nuvens;
+ - Mar á volta das ilhas;
+ - Algumas casas;
+ 
+Inimigo
+ - Aparecem atraves de um barco que se aproxima da ilha dos dois lados;
+ - Inimigos são zombies piratas;
+ - + pontos = mais velocidade dos zombies;
+ - Quando se aproximam do jogador a barra de vida do jogador desce;
+ - Alguns zombies quando morrem oferecem poção que aumenta um bocadinho de vida;
+ 
+Armas
+ - Zombies não conteem armas;
+ - Ninja contem apenas uma espada; 
+  
