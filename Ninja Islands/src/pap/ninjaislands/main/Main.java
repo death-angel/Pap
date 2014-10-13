@@ -26,6 +26,11 @@ public class Main implements Runnable{
 	public static double OFFSETX = 0;
 	public static double OFFSETY = 0;
 	
+	private int MAPX = 0;
+	private int MAPY = HEIGHT/2/ZOOM+ZOOM;
+	private int MAPWIDTH = 188 * ZOOM;
+	private int MAPHEIGHT = 27 * ZOOM;
+	
 	public boolean isRunning = false;//estado do jogo: true = jogar false = pausa
 	
 	Image screen; //vai servir para não se notar as transaçoes das frames
@@ -36,13 +41,12 @@ public class Main implements Runnable{
 		janela.setTitle(nome); //definir nome da janela 
 		janela.setSize(WIDTH, HEIGHT); //definir tamanho da janela
 		janela.setResizable(false); //false = nao permitir mudar resolução da janela
-		janela.setExtendedState(janela.getExtendedState() | JFrame.MAXIMIZED_BOTH);//colocar janela maximizada
 		janela.setLocationRelativeTo(null); //centrar janela no ecra
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //fechar corretamente a janela
 		janela.setVisible(true);
 		
 		new ImageLoad();
-		gamemap = new GameMap(0, HEIGHT/2/ZOOM+ZOOM, 188 * ZOOM, 27 * ZOOM);
+		gamemap = new GameMap(MAPX, MAPY, MAPWIDTH, MAPHEIGHT);
 		
 		isRunning = true;
 		new Thread(this).start();
