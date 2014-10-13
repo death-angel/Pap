@@ -63,7 +63,7 @@ public class Main implements Runnable{
 		g.setColor(new Color(153, 217, 234)); //definir cor em RGB
 		g.fillRect(0, 0, WIDTH, HEIGHT); //desenhar retangulo preenchido
 		
-		//mapa
+		//renderizar mapa
 		gamemap.render(g);
 		
 		//mar
