@@ -48,7 +48,7 @@ public class Main implements Runnable{
 	}
 	
 	public void tick(){
-		//logica
+		//logicas
 	}
 	
 	public void render(){
