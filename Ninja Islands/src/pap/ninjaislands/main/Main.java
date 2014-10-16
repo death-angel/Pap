@@ -27,12 +27,14 @@ public class Main implements Runnable{
 	public static int HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
 	
 	public static int ZOOM = 4;
+	public static int ZOOMWIDTH = WIDTH/ZOOM;
+	public static int ZOOMHEIGHT = HEIGHT/ZOOM;
 	
 	public static double OFFSETX = 0;
 	public static double OFFSETY = 0;
 	
 	private int MAPX = 0;
-	private int MAPY = HEIGHT/2/ZOOM+ZOOM;
+	private int MAPY = ZOOMHEIGHT/2+ZOOM;
 	private int MAPWIDTH = 188 * ZOOM;
 	private int MAPHEIGHT = 27 * ZOOM;
 	
