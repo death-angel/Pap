@@ -8,6 +8,10 @@ import pap.ninjaislands.resource.ImageLoad;
 
 public class GameMap{
 	
+	/*
+	 * @autor Carlos Almeida
+	 */
+	
 	int x;
 	int y;
 	int width;

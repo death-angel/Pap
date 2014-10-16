@@ -7,19 +7,24 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
+import pap.ninjaislands.entity.Ninja;
 import pap.ninjaislands.resource.ImageLoad;
 import pap.ninjaislands.world.GameMap;
 
 public class Main implements Runnable{
+	
+	/*
+	 * @autor Carlos Almeida
+	 */
 
 	JFrame janela;
 	
 	private String nome = "Ninja vs Zombie Pirates - Prototipo";
 	
 	//comprimento do ecra
-	private int WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
+	public static int WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
 	//largura do ecra
-	private int HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
+	public static int HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
 	
 	public static int ZOOM = 4;
 	
@@ -31,10 +36,14 @@ public class Main implements Runnable{
 	private int MAPWIDTH = 188 * ZOOM;
 	private int MAPHEIGHT = 27 * ZOOM;
 	
+	private int NINJAWIDTH = 9/ZOOM;
+	private int NINJAHEIGHT = 19/ZOOM;
+	
 	public boolean isRunning = false;//estado do jogo: true = jogar false = pausa
 	
 	Image screen; //vai servir para não se notar as transaçoes das frames
 	GameMap gamemap;
+	Ninja ninja;
 	
 	public Main(){
 		janela = new JFrame();//inicializar
@@ -47,6 +56,7 @@ public class Main implements Runnable{
 		
 		new ImageLoad();
 		gamemap = new GameMap(MAPX, MAPY, MAPWIDTH, MAPHEIGHT);
+		ninja = new Ninja(NINJAWIDTH * ZOOM, NINJAHEIGHT * ZOOM);
 		
 		isRunning = true;
 		new Thread(this).start();
@@ -65,6 +75,7 @@ public class Main implements Runnable{
 		
 		//renderizar mapa
 		gamemap.render(g);
+		ninja.render(g);
 		
 		//mar
 		g.setColor(new Color(0, 162, 232, 225));
