@@ -1,4 +1,4 @@
-package pap.ninjaislands.resource;
+package pap.ninjaislands.mechanical;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

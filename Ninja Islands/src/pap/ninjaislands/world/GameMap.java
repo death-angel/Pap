@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import pap.ninjaislands.main.Main;
-import pap.ninjaislands.resource.ImageLoad;
+import pap.ninjaislands.mechanical.ImageLoad;
 
 public class GameMap{
 	
@@ -12,10 +12,10 @@ public class GameMap{
 	 * @autor Carlos Almeida
 	 */
 	
-	int x;
-	int y;
-	int width;
-	int height;
+	public static int x;
+	public static int y;
+	public static int width;
+	public static int height;
 	
 	Rectangle mapa = new Rectangle();
 

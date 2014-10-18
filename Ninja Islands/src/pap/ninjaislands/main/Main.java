@@ -8,7 +8,7 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 import pap.ninjaislands.entity.Ninja;
-import pap.ninjaislands.resource.ImageLoad;
+import pap.ninjaislands.mechanical.ImageLoad;
 import pap.ninjaislands.world.GameMap;
 
 public class Main implements Runnable{
@@ -66,6 +66,7 @@ public class Main implements Runnable{
 	
 	public void tick(){
 		//logicas
+		ninja.tick();
 	}
 	
 	public void render(){
