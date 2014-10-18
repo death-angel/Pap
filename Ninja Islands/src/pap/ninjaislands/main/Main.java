@@ -8,7 +8,8 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 import pap.ninjaislands.entity.Ninja;
-import pap.ninjaislands.mechanical.ImageLoad;
+import pap.ninjaislands.mechanics.Controller;
+import pap.ninjaislands.mechanics.ImageLoad;
 import pap.ninjaislands.world.GameMap;
 
 public class Main implements Runnable{
@@ -44,8 +45,8 @@ public class Main implements Runnable{
 	public boolean isRunning = false;//estado do jogo: true = jogar false = pausa
 	
 	Image screen; //vai servir para não se notar as transaçoes das frames
-	GameMap gamemap;
-	Ninja ninja;
+	public static GameMap gamemap;
+	public static Ninja ninja;
 	
 	public Main(){
 		janela = new JFrame();//inicializar
@@ -55,6 +56,8 @@ public class Main implements Runnable{
 		janela.setLocationRelativeTo(null); //centrar janela no ecra
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //fechar corretamente a janela
 		janela.setVisible(true);
+		
+		janela.addKeyListener(new Controller()); //controlos
 		
 		new ImageLoad();
 		gamemap = new GameMap(MAPX, MAPY, MAPWIDTH, MAPHEIGHT);

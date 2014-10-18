@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import pap.ninjaislands.main.Main;
-import pap.ninjaislands.mechanical.ImageLoad;
+import pap.ninjaislands.mechanics.ImageLoad;
 
 public class GameMap{
 	
@@ -28,7 +28,7 @@ public class GameMap{
 	}
 	
 	public void render(Graphics g){
-		g.drawImage(ImageLoad.ilhas, x - (int)Main.OFFSETX, y - (int)Main.OFFSETY, width - (int)Main.OFFSETX, height - (int)Main.OFFSETY, null);
+		g.drawImage(ImageLoad.ilhas, x - (int)Main.OFFSETX, y - (int)Main.OFFSETY, width, height, null);
 	}
 	
 }
