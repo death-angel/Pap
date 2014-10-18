@@ -14,8 +14,8 @@ public class Ninja{
 	 */
 	
 	public double charSpeed = 1.2;
-	public double width; 
-	public double height;
+	public int width; 
+	public int height;
 	//calculo para centrar personagem no meio do ecra
 	public double x = Main.ZOOMWIDTH/2 - width/2;
 	public double y = Main.ZOOMHEIGHT/2 - height/2 - 30;
@@ -27,7 +27,7 @@ public class Ninja{
 	
 	public boolean isFalling = true;
 	
-	public Ninja(double width, double height){
+	public Ninja(int width, int height){
 		this.width = width;
 		this.height = height;
 		collisions = new Collisions();
@@ -41,7 +41,11 @@ public class Ninja{
 	}
 	
 	public void render(Graphics g){
-			g.drawImage(ImageLoad.ninja, (int)x, (int)y, (int)width, (int)height, null);
+		if(dir > 0){
+			g.drawImage(ImageLoad.ninja, (int)x+width, (int)y, -width, height, null);//inverte a imagem
+		}else{
+			g.drawImage(ImageLoad.ninja, (int)x, (int)y, width, height, null);//imagem normal
+		}
 	}
 	
 }
