@@ -40,6 +40,8 @@ public class Ninja{
 		if(isFalling) y += charFallingSpeed;
 		if(collisions.ninjaCollidingWithGround(this)){
 			isFalling = false;
+		}else{
+			isFalling = true;
 		}
 		//movimento de andar
 		if(isWalking){

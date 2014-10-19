@@ -1,7 +1,7 @@
 Ideias para o Ninja Islands (nome não permanente):
 
 Personagem
- - Personagem é um ninja;
+ - Personagem é um ninja;<-
  - Movimento andar para os lados;
  - Movimentos Saltar;
  - Ninja com espada na mão apertando tecla W;
@@ -13,7 +13,7 @@ Cenário
  - Algumas agrupadas por pontes de madeira; <-
  - Fundo com o céu azul, sol brilhante sem nuvens;
  - Mar á volta das ilhas;
- - Algumas casas;
+ - Algumas arvores;
  
 Inimigo
  - Aparecem atraves de um barco que se aproxima da ilha dos dois lados;

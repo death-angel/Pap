@@ -12,7 +12,7 @@ public class Collisions {
 
 	public boolean ninjaCollidingWithGround(Ninja ninja){
 		
-		if((ninja.y+ninja.height) >= GameMap.y+(Main.ZOOM*3)) return true;
+		if((ninja.y+ninja.height) >= GameMap.y+(Main.ZOOM*3) && (ninja.x >= (GameMap.x - ninja.width)) && (ninja.x <= (GameMap.x+GameMap.width))) return true;
 			
 		return false;
 	}
