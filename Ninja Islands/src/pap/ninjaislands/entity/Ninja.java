@@ -19,7 +19,7 @@ public class Ninja{
 	public static int height;
 	//calculo para centrar personagem no meio do ecra
 	public static double x = Main.ZOOMWIDTH/2 - width/2;
-	public static double y = Main.ZOOMHEIGHT/2 - height/2 - 30;
+	public static double y = Main.ZOOMHEIGHT/2 - height/2 - 31;
 	
 	public static double dir; //direção do personagem (esquerda < 0, direita > 0)
 	
