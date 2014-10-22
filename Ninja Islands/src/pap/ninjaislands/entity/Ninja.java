@@ -23,6 +23,12 @@ public class Ninja{
 	
 	public static double dir; //direção do personagem (esquerda < 0, direita > 0)
 	
+	//Variaveis para sistema de salto
+	public static boolean isJumping = false;
+	public double jumpSpeed = 12.2;
+	public double startJump = 0.0;
+	public double maxJump = 20.0;
+	
 	Collisions collisions;
 	GameMap gamemap;
 	
@@ -47,6 +53,19 @@ public class Ninja{
 		if(isWalking){
 			x += dir;
 			Main.OFFSETX += dir; 
+		}
+		
+		//salto
+		if(isJumping && !isFalling){
+			if(startJump < maxJump){
+				y -= jumpSpeed;
+				startJump += jumpSpeed;
+			}
+		}else{
+			if(isFalling){
+				isJumping = false;
+				startJump = 0.0;
+			}
 		}
 		
 	}

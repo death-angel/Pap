@@ -15,6 +15,7 @@ public class Controller implements KeyListener{
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode(); //obtem o codigo da tecla pressionada 
 		
+		//andar
 		if(key == KeyEvent.VK_RIGHT){
 			Ninja.isWalking = true;
 			Ninja.dir = Ninja.charWalkSpeed;
@@ -23,6 +24,11 @@ public class Controller implements KeyListener{
 		if(key == KeyEvent.VK_LEFT){
 			Ninja.isWalking = true;
 			Ninja.dir = -Ninja.charWalkSpeed;
+		}
+		
+		//saltar
+		if(key == KeyEvent.VK_SPACE){
+			Ninja.isJumping = true;
 		}
 		
 	}
@@ -36,6 +42,11 @@ public class Controller implements KeyListener{
 		
 		if(key == KeyEvent.VK_LEFT){
 			Ninja.isWalking = false;
+		}
+		
+		//saltar
+		if(key == KeyEvent.VK_SPACE){
+			Ninja.isJumping = false;
 		}
 	}
 
