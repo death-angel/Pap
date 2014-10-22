@@ -25,14 +25,14 @@ public class Ninja{
 	
 	//Variaveis para sistema de salto
 	public static boolean isJumping = false;
-	public double jumpSpeed = 12.2;
-	public double startJump = 0.0;
-	public double maxJump = 20.0;
+	public double jumpSpeed = 4.2;
+	public double jumpHeight = 0.0;
+	public double maxJumpHeight = 20.0;
 	
 	Collisions collisions;
 	GameMap gamemap;
 	
-	public boolean isFalling = true;
+	public static boolean isFalling = true;
 	public static boolean isWalking = false;
 	
 	public Ninja(int width, int height){
@@ -56,15 +56,12 @@ public class Ninja{
 		}
 		
 		//salto
-		if(isJumping && !isFalling){
-			if(startJump < maxJump){
-				y -= jumpSpeed;
-				startJump += jumpSpeed;
-			}
-		}else{
-			if(isFalling){
+		if(isJumping){
+			y -= jumpSpeed;
+			jumpHeight += jumpSpeed;
+			if(jumpHeight >= maxJumpHeight){
 				isJumping = false;
-				startJump = 0.0;
+				jumpHeight = 0.0;
 			}
 		}
 		

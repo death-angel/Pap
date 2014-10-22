@@ -28,7 +28,7 @@ public class Controller implements KeyListener{
 		
 		//saltar
 		if(key == KeyEvent.VK_SPACE){
-			Ninja.isJumping = true;
+			if(!Ninja.isFalling)Ninja.isJumping = true;
 		}
 		
 	}
