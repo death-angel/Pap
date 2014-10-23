@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import pap.ninjaislands.entity.Ninja;
 import pap.ninjaislands.mechanics.Controller;
 import pap.ninjaislands.mechanics.ImageLoad;
+import pap.ninjaislands.menus.PauseMenu;
 import pap.ninjaislands.world.GameMap;
 
 public class Main implements Runnable{
@@ -18,7 +19,7 @@ public class Main implements Runnable{
 	 * @autor Carlos Almeida
 	 */
 
-	JFrame janela;
+	public static JFrame janela;
 	
 	private String nome = "Ninja vs Zombie Pirates - Prototipo";
 	
@@ -43,10 +44,12 @@ public class Main implements Runnable{
 	private int NINJAHEIGHT = 19/ZOOM;
 	
 	public boolean isRunning = false;//estado do jogo: true = jogar false = pausa
+	public static boolean isPaused = false;
 	
 	Image screen; //vai servir para não se notar as transaçoes das frames
 	public static GameMap gamemap;
 	public static Ninja ninja;
+	public static PauseMenu pausemenu;
 	
 	public Main(){
 		janela = new JFrame();//inicializar
@@ -62,6 +65,7 @@ public class Main implements Runnable{
 		new ImageLoad();
 		gamemap = new GameMap(MAPX, MAPY, MAPWIDTH, MAPHEIGHT);
 		ninja = new Ninja(NINJAWIDTH * ZOOM, NINJAHEIGHT * ZOOM);
+		pausemenu = new PauseMenu();
 		
 		isRunning = true;
 		new Thread(this).start();
@@ -69,23 +73,30 @@ public class Main implements Runnable{
 	
 	public void tick(){
 		//logicas
-		ninja.tick();
+		if(!isPaused){
+			ninja.tick();
+		}else{
+			pausemenu.tick();
+		}
 	}
 	
 	public void render(){
 		//graficos
 		Graphics g = screen.getGraphics(); //inicialização
-		//Fundo/ceu
-		g.setColor(new Color(153, 217, 234)); //definir cor em RGB
-		g.fillRect(0, 0, WIDTH, HEIGHT); //desenhar retangulo preenchido
-		
-		//renderizar mapa
-		gamemap.render(g);
-		ninja.render(g);
-		
-		//mar
-		g.setColor(new Color(0, 162, 232, 225));
-		g.fillRect(0, HEIGHT/ZOOM - 11 * ZOOM, WIDTH, 11*ZOOM);
+			//Fundo/ceu
+			g.setColor(new Color(153, 217, 234)); //definir cor em RGB
+			g.fillRect(0, 0, WIDTH, HEIGHT); //desenhar retangulo preenchido
+			
+			//renderizar mapa
+			gamemap.render(g);
+			ninja.render(g);
+			
+			//mar
+			g.setColor(new Color(0, 162, 232, 225));
+			g.fillRect(0, HEIGHT/ZOOM - 11 * ZOOM, WIDTH, 11*ZOOM);
+			if(isPaused){
+				pausemenu.render(g);
+			}
 		
 		g = janela.getGraphics(); //obter graficos
 		

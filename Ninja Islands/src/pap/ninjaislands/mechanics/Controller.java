@@ -31,6 +31,25 @@ public class Controller implements KeyListener{
 			if(!Ninja.isFalling)Ninja.isJumping = true;
 		}
 		
+		if(!Main.isPaused){
+			if(key == KeyEvent.VK_ENTER){
+					Main.isPaused = true;			
+			}
+			
+		}else if(Main.isPaused){
+			if(key == KeyEvent.VK_ENTER){
+					Main.pausemenu.selected = true;
+			}	
+			
+			if(key == KeyEvent.VK_UP){
+				Main.pausemenu.count -= 1;
+			}
+			
+			if(key == KeyEvent.VK_DOWN){
+				Main.pausemenu.count += 1;
+			}
+		}
+		
 	}
 
 	public void keyReleased(KeyEvent e) {
