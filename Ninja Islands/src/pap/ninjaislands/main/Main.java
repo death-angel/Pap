@@ -85,7 +85,7 @@ public class Main implements Runnable{
 		Graphics g = screen.getGraphics(); //inicialização
 			//Fundo/ceu
 			g.setColor(new Color(153, 217, 234)); //definir cor em RGB
-			g.fillRect(0, 0, WIDTH, HEIGHT); //desenhar retangulo preenchido
+			g.fillRect(0, 0, ZOOMWIDTH, ZOOMHEIGHT); //desenhar retangulo preenchido
 			
 			//renderizar mapa
 			gamemap.render(g);
@@ -93,7 +93,7 @@ public class Main implements Runnable{
 			
 			//mar
 			g.setColor(new Color(0, 162, 232, 225));
-			g.fillRect(0, HEIGHT/ZOOM - 11 * ZOOM, WIDTH, 11*ZOOM);
+			g.fillRect(0, ZOOMHEIGHT - 11 * ZOOM, ZOOMWIDTH, 11*ZOOM);
 			if(isPaused){
 				pausemenu.render(g);
 			}
