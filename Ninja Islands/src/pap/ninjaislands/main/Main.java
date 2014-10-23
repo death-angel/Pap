@@ -127,6 +127,12 @@ public class Main implements Runnable{
 				janela.setTitle(nome+" FPS:"+ticks);
 				ticks = 0;
 			}
+			
+			try {
+				Thread.sleep(ticks/1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();//mostrar erros no terminal
+			}
 		}
 	}
 	
