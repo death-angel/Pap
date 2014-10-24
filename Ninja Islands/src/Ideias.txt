@@ -2,11 +2,10 @@ Ideias para o Ninja Islands (nome não permanente):
 
 Personagem
  - Personagem é um ninja;<-
- - Movimento andar para os lados;
- - Movimentos Saltar;
+ - Movimento andar para os lados;<-
+ - Movimentos Saltar;<-
  - Ninja com espada na mão apertando tecla W;
  - Golpe simples através da Barra de Espaço;
- - Movimentos com as setas;
  
 Cenário
  - 3 ilhas; <-
