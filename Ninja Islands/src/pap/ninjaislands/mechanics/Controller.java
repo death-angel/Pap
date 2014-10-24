@@ -62,11 +62,6 @@ public class Controller implements KeyListener{
 		if(key == KeyEvent.VK_LEFT){
 			Ninja.isWalking = false;
 		}
-		
-		/*saltar
-		if(key == KeyEvent.VK_SPACE){
-			Ninja.isJumping = false;
-		}*/
 	}
 
 	public void keyTyped(KeyEvent e) {
