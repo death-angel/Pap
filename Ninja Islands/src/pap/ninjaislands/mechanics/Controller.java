@@ -63,10 +63,10 @@ public class Controller implements KeyListener{
 			Ninja.isWalking = false;
 		}
 		
-		//saltar
+		/*saltar
 		if(key == KeyEvent.VK_SPACE){
 			Ninja.isJumping = false;
-		}
+		}*/
 	}
 
 	public void keyTyped(KeyEvent e) {

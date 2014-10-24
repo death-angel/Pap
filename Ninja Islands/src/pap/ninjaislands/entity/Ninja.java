@@ -13,21 +13,21 @@ public class Ninja{
 	 * @autor Carlos Almeida
 	 */
 	
-	public double charFallingSpeed = 1.5;
+	public double currentFallSpeed = 0.1;
+	public double maxFallSpeed = 2.5;
 	public static double charWalkSpeed = 1.2;
 	public static int width; 
 	public static int height;
 	//calculo para centrar personagem no meio do ecra
 	public static double x = Main.ZOOMWIDTH/2 - width/2;
-	public static double y = Main.ZOOMHEIGHT/2 - height/2 - 31;
+	public static double y = Main.ZOOMHEIGHT/2 - height/2 - 30;
 	
 	public static double dir; //direção do personagem (esquerda < 0, direita > 0)
 	
 	//Variaveis para sistema de salto
 	public static boolean isJumping = false;
-	public double jumpSpeed = 4.2;
-	public double jumpHeight = 0.0;
-	public double maxJumpHeight = 20.0;
+	public double jumpSpeed = 5;
+	public double currentJumpSpeed = jumpSpeed;
 	
 	Collisions collisions;
 	GameMap gamemap;
@@ -43,9 +43,22 @@ public class Ninja{
 	
 	public void tick(){
 		//gravidade
-		if(isFalling) y += charFallingSpeed;
+		if(isFalling){
+			y += currentFallSpeed;
+			
+			if(currentFallSpeed < maxFallSpeed){
+				currentFallSpeed += 0.1;
+			}
+			
+		}
+		//colisão
 		if(collisions.ninjaCollidingWithGround(this)){
 			isFalling = false;
+			
+			if(collisions.ninjaIsUnderTheGround(this)){
+				y -= collisions.distanceToTheSurface(this); //resolver o problema em que o ninja ficava enterrado no terreno da ilha
+			}
+			
 		}else{
 			isFalling = true;
 		}
@@ -57,12 +70,15 @@ public class Ninja{
 		
 		//salto
 		if(isJumping){
-			y -= jumpSpeed;
-			jumpHeight += jumpSpeed;
-			if(jumpHeight >= maxJumpHeight){
+			y -= currentJumpSpeed;
+			currentJumpSpeed -= 0.1;
+			
+			if(currentJumpSpeed <= 0){
+				currentJumpSpeed = jumpSpeed;
 				isJumping = false;
-				jumpHeight = 0.0;
+				isFalling = true;
 			}
+			
 		}
 		
 	}
