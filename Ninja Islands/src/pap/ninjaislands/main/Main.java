@@ -40,8 +40,8 @@ public class Main implements Runnable{
 	private int MAPWIDTH = 188 * ZOOM;
 	private int MAPHEIGHT = 27 * ZOOM;
 	
-	private int NINJAWIDTH = 9/ZOOM;
-	private int NINJAHEIGHT = 19/ZOOM;
+	private int NINJAWIDTH = 9;
+	private int NINJAHEIGHT = 19;
 	
 	public boolean isRunning = false;//estado do jogo: true = jogar false = pausa
 	public static boolean isPaused = false;
@@ -64,7 +64,7 @@ public class Main implements Runnable{
 		
 		new ImageLoad();
 		gamemap = new GameMap(MAPX, MAPY, MAPWIDTH, MAPHEIGHT);
-		ninja = new Ninja(NINJAWIDTH * ZOOM, NINJAHEIGHT * ZOOM);
+		ninja = new Ninja(NINJAWIDTH, NINJAHEIGHT);
 		pausemenu = new PauseMenu();
 		
 		isRunning = true;

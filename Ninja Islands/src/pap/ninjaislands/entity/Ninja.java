@@ -15,7 +15,7 @@ public class Ninja{
 	
 	public double currentFallSpeed = 0.1;
 	public double maxFallSpeed = 2.5;
-	public static double charWalkSpeed = 1.2;
+	public static double charWalkSpeed = 1.0;
 	public static int width; 
 	public static int height;
 	//calculo para centrar personagem no meio do ecra
@@ -28,6 +28,11 @@ public class Ninja{
 	public static boolean isJumping = false;
 	public double jumpSpeed = 5;
 	public double currentJumpSpeed = jumpSpeed;
+	
+	//animação
+	public int animation;
+	public int animation_frame;
+	public int animation_time = 17;
 	
 	Collisions collisions;
 	GameMap gamemap;
@@ -66,6 +71,21 @@ public class Ninja{
 		if(isWalking){
 			x += dir;
 			Main.OFFSETX += dir; 
+			
+			//animação
+			if(animation_frame >= animation_time){
+				if(animation > 1){
+					animation = 1;
+				}else{
+					animation += 1;
+				}
+				animation_frame = 0;
+			}else{
+				animation_frame +=1;
+			}
+			
+		}else{
+			animation = 0;
 		}
 		
 		//salto
@@ -78,16 +98,15 @@ public class Ninja{
 				isJumping = false;
 				isFalling = true;
 			}
-			
 		}
 		
 	}
 	
 	public void render(Graphics g){
 		if(dir > 0){
-			g.drawImage(ImageLoad.ninja, (int)(x+width) - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, -width, height, null);//inverte a imagem
+			g.drawImage(ImageLoad.ninja, (int)(x+width) - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width)-width - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*animation), 0 * height, (0*width) + width + (animation*width), (0*height) + height,null);//inverte a imagem
 		}else{
-			g.drawImage(ImageLoad.ninja, (int)x - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, width, height, null);//imagem normal
+			g.drawImage(ImageLoad.ninja, (int)x - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width) - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*animation), 0 * height, (0*width) + width + (animation*width), (0*height) + height, null);//imagem normal
 		}
 	}
 	
