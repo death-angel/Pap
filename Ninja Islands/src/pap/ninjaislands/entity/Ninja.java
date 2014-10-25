@@ -29,10 +29,15 @@ public class Ninja{
 	public double jumpSpeed = 5;
 	public double currentJumpSpeed = jumpSpeed;
 	
-	//animação
-	public int animation;
-	public int animation_frame;
-	public int animation_time = 17;
+	//animação de andar
+	public int wanimation;
+	public int wanimation_frame;
+	public int wanimation_time = 17;
+	
+	//animação parado
+	public int sanimation;
+	public int sanimation_frame;
+	public int sanimation_time = 45;
 	
 	Collisions collisions;
 	GameMap gamemap;
@@ -72,20 +77,35 @@ public class Ninja{
 			x += dir;
 			Main.OFFSETX += dir; 
 			
-			//animação
-			if(animation_frame >= animation_time){
-				if(animation > 1){
-					animation = 1;
+			sanimation = 0;
+			
+			//animação de andar
+			if(wanimation_frame >= wanimation_time){
+				if(wanimation > 1){
+					wanimation = 1;
 				}else{
-					animation += 1;
+					wanimation += 1;
 				}
-				animation_frame = 0;
+				wanimation_frame = 0;
 			}else{
-				animation_frame +=1;
+				wanimation_frame +=1;
 			}
 			
 		}else{
-			animation = 0;
+			wanimation = 0;
+			if(!isJumping){
+				//animação de parado
+				if(sanimation_frame >= sanimation_time){
+					if(sanimation > 1){
+						sanimation = 1;
+					}else{
+						sanimation += 1;
+					}
+					sanimation_frame = 0;
+				}else{
+					sanimation_frame +=1;
+				}
+			}
 		}
 		
 		//salto
@@ -103,10 +123,18 @@ public class Ninja{
 	}
 	
 	public void render(Graphics g){
-		if(dir > 0){
-			g.drawImage(ImageLoad.ninja, (int)(x+width) - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width)-width - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*animation), 0 * height, (0*width) + width + (animation*width), (0*height) + height,null);//inverte a imagem
+		if(isWalking){
+			if(dir > 0){
+				g.drawImage(ImageLoad.ninja, (int)(x+width) - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width)-width - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*wanimation), 0 * height, (0*width) + width + (wanimation*width), (0*height) + height,null);//inverte a imagem
+			}else{
+				g.drawImage(ImageLoad.ninja, (int)x - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width) - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*wanimation), 0 * height, (0*width) + width + (wanimation*width), (0*height) + height, null);//imagem normal
+			}
 		}else{
-			g.drawImage(ImageLoad.ninja, (int)x - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width) - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*animation), 0 * height, (0*width) + width + (animation*width), (0*height) + height, null);//imagem normal
+			if(dir > 0){
+				g.drawImage(ImageLoad.ninja, (int)(x+width) - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width)-width - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*sanimation), 1 * height, (0*width) + width + (sanimation*width), (1*height) + height,null);//inverte a imagem
+			}else{
+				g.drawImage(ImageLoad.ninja, (int)x - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width) - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*sanimation), 1 * height, (0*width) + width + (sanimation*width), (1*height) + height, null);//imagem normal
+			}
 		}
 	}
 	
