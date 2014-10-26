@@ -32,7 +32,7 @@ public class Ninja{
 	//animação de andar
 	public int wanimation;
 	public int wanimation_frame;
-	public int wanimation_time = 17;
+	public int wanimation_time = 13;
 	
 	//animação parado
 	public int sanimation;

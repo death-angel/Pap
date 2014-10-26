@@ -23,5 +23,5 @@ Inimigo
  
 Armas
  - Zombies não conteem armas;
- - Ninja contem apenas uma espada; 
+ - Ninja contem uma espada e arco; 
   
