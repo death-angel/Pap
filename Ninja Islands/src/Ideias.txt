@@ -17,9 +17,9 @@ Cenário
 Inimigo
  - Aparecem atraves de um barco que se aproxima da ilha dos dois lados;
  - Inimigos são zombies piratas;
- - + pontos = mais velocidade dos zombies;
+ - + pontos = mais velocidade dos zombies e + zombies;
  - Quando se aproximam do jogador a barra de vida do jogador desce;
- - Alguns zombies quando morrem oferecem poção que aumenta um bocadinho de vida;
+ - Alguns zombies quando morrem oferecem poção que aumenta um bocadinho de vida e setas para o arco;
  
 Armas
  - Zombies não conteem armas;

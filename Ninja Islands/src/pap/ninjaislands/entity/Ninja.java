@@ -30,14 +30,14 @@ public class Ninja{
 	public double currentJumpSpeed = jumpSpeed;
 	
 	//animação de andar
-	public int wanimation;
+	public int wanimation = 1;
 	public int wanimation_frame;
-	public int wanimation_time = 13;
+	public int wanimation_time = 10;
 	
 	//animação parado
-	public int sanimation;
+	public int sanimation = 1;
 	public int sanimation_frame;
-	public int sanimation_time = 45;
+	public int sanimation_time = 48;
 	
 	Collisions collisions;
 	GameMap gamemap;
@@ -81,8 +81,8 @@ public class Ninja{
 			
 			//animação de andar
 			if(wanimation_frame >= wanimation_time){
-				if(wanimation > 1){
-					wanimation = 1;
+				if(wanimation > 4){
+					wanimation = 0;
 				}else{
 					wanimation += 1;
 				}
@@ -125,9 +125,9 @@ public class Ninja{
 	public void render(Graphics g){
 		if(isWalking){
 			if(dir > 0){
-				g.drawImage(ImageLoad.ninja, (int)(x+width) - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width)-width - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*wanimation), 0 * height, (0*width) + width + (wanimation*width), (0*height) + height,null);//inverte a imagem
+				g.drawImage(ImageLoad.ninja, (int)(x+width) - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width)-width - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/*animação*/(width*wanimation), 0, width + (wanimation*width), height,null);//inverte a imagem
 			}else{
-				g.drawImage(ImageLoad.ninja, (int)x - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width) - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*wanimation), 0 * height, (0*width) + width + (wanimation*width), (0*height) + height, null);//imagem normal
+				g.drawImage(ImageLoad.ninja, (int)x - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width) - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/(width*wanimation), 0, width + (wanimation*width), height, null);//imagem normal
 			}
 		}else{
 			if(dir > 0){
