@@ -81,7 +81,7 @@ public class Ninja{
 			
 			//animação de andar
 			if(wanimation_frame >= wanimation_time){
-				if(wanimation > 4){
+				if(wanimation > 2){
 					wanimation = 0;
 				}else{
 					wanimation += 1;
