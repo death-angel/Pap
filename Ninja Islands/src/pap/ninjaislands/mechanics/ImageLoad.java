@@ -19,6 +19,7 @@ public class ImageLoad {
 			ilhas = ImageIO.read(getClass().getResource("/ilhas.png"));
 			ninja = ImageIO.read(getClass().getResource("/ninja.png"));
 		} catch (IOException e) {
+			Debug.Print("Ocurreu um erro nas texturas");
 			e.printStackTrace();
 		}
 	}

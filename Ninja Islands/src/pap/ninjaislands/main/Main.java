@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 
 import pap.ninjaislands.entity.Ninja;
 import pap.ninjaislands.mechanics.Controller;
+import pap.ninjaislands.mechanics.Debug;
 import pap.ninjaislands.mechanics.ImageLoad;
 import pap.ninjaislands.menus.PauseMenu;
 import pap.ninjaislands.world.GameMap;
@@ -60,11 +61,24 @@ public class Main implements Runnable{
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //fechar corretamente a janela
 		janela.setVisible(true);
 		
+		Debug.Print("Janela criada");
+		
 		janela.addKeyListener(new Controller()); //controlos
 		
+		Debug.Print("Controlos Inicializados");
+		
 		new ImageLoad();
+		
+		Debug.Print("Textura Carregada");
+		
 		gamemap = new GameMap(MAPX, MAPY, MAPWIDTH, MAPHEIGHT);
+		
+		Debug.Print("Mapa Carregado");
+		
 		ninja = new Ninja(NINJAWIDTH, NINJAHEIGHT);
+		
+		Debug.Print("Ninja Carregado");
+		
 		pausemenu = new PauseMenu();
 		
 		isRunning = true;
@@ -142,6 +156,7 @@ public class Main implements Runnable{
 			try {
 				Thread.sleep(ticks/1000);
 			} catch (InterruptedException e) {
+				Debug.Print("Ocorreu um erro");
 				e.printStackTrace();//mostrar erros no terminal
 			}
 		}
