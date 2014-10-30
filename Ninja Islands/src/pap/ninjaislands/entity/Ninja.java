@@ -32,12 +32,12 @@ public class Ninja{
 	//animação de andar
 	public int wanimation = 1;
 	public int wanimation_frame;
-	public int wanimation_time = 10;
+	public int wanimation_time = 6;
 	
 	//animação parado
 	public int sanimation = 1;
 	public int sanimation_frame;
-	public int sanimation_time = 48;
+	public int sanimation_time = 45;
 	
 	Collisions collisions;
 	GameMap gamemap;

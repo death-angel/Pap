@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 import javax.swing.JFrame;
 
@@ -156,8 +158,7 @@ public class Main implements Runnable{
 			try {
 				Thread.sleep(ticks/1000);
 			} catch (InterruptedException e) {
-				Debug.Print("Ocorreu um erro");
-				e.printStackTrace();//mostrar erros no terminal
+				e.printStackTrace();
 			}
 		}
 	}
