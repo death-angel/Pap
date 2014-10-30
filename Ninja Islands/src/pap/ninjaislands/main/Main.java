@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 
 import javax.swing.JFrame;
 
