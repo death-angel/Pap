@@ -11,6 +11,7 @@ import pap.ninjaislands.entity.Ninja;
 import pap.ninjaislands.mechanics.Controller;
 import pap.ninjaislands.mechanics.Debug;
 import pap.ninjaislands.mechanics.ImageLoad;
+import pap.ninjaislands.mechanics.UserInterface;
 import pap.ninjaislands.menus.PauseMenu;
 import pap.ninjaislands.world.GameMap;
 
@@ -22,7 +23,7 @@ public class Main implements Runnable{
 
 	public static JFrame janela;
 	
-	private String nome = "Ninja vs Zombie Pirates - Pre-Alpha - 0.1.0.1";
+	private String nome = "Ninja vs Zombie Pirates - Pre-Alpha - 0.2.0.5";
 	
 	//comprimento do ecra
 	public static int WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
@@ -44,6 +45,9 @@ public class Main implements Runnable{
 	private int NINJAWIDTH = 9;
 	private int NINJAHEIGHT = 19;
 	
+	public int health = 100;
+	public int lifes = 3;
+	
 	public boolean isRunning = false;//estado do jogo: true = jogar false = pausa
 	public static boolean isPaused = false;
 	
@@ -51,6 +55,7 @@ public class Main implements Runnable{
 	public static GameMap gamemap;
 	public static Ninja ninja;
 	public static PauseMenu pausemenu;
+	public static UserInterface ui;
 	
 	public Main(){
 		janela = new JFrame();//inicializar
@@ -81,6 +86,8 @@ public class Main implements Runnable{
 		
 		pausemenu = new PauseMenu();
 		
+		ui = new UserInterface(health, lifes);
+		
 		isRunning = true;
 		new Thread(this).start();
 	}
@@ -103,14 +110,18 @@ public class Main implements Runnable{
 			
 			//renderizar mapa
 			gamemap.render(g);
+			//renderizar ninja
 			ninja.render(g);
 			
 			//mar
 			g.setColor(new Color(0, 162, 232, 225));
 			g.fillRect(0, ZOOMHEIGHT - 11 * ZOOM, ZOOMWIDTH, 11*ZOOM);
 			if(isPaused){
+				//menu de pausa
 				pausemenu.render(g);
 			}
+			//user interface
+			ui.render(g);
 		
 		g = janela.getGraphics(); //obter graficos
 		
