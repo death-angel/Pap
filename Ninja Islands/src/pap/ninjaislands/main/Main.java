@@ -23,7 +23,7 @@ public class Main implements Runnable{
 
 	public static JFrame janela;
 	
-	private String nome = "Ninja vs Zombie Pirates - Pre-Alpha - 0.2.0.5";
+	private String nome = "Ninja vs Zombie Pirates - Pre-Alpha - 0.2.1.4";
 	
 	//comprimento do ecra
 	public static int WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
