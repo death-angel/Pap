@@ -23,7 +23,7 @@ public class Main implements Runnable{
 
 	public static JFrame janela;
 	
-	private String nome = "Ninja vs Zombie Pirates - Pre-Alpha - 0.2.1.4";
+	private String nome = "Ninja vs Zombie Pirates - Pre-Alpha - 0.2.2.0";
 	
 	//comprimento do ecra
 	public static int WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
@@ -46,7 +46,7 @@ public class Main implements Runnable{
 	private int NINJAHEIGHT = 19;
 	
 	public int health = 100;
-	public int lifes = 3;
+	public int lives = 3;
 	
 	public boolean isRunning = false;//estado do jogo: true = jogar false = pausa
 	public static boolean isPaused = false;
@@ -64,6 +64,7 @@ public class Main implements Runnable{
 		janela.setResizable(false); //false = nao permitir mudar resolução da janela
 		janela.setLocationRelativeTo(null); //centrar janela no ecra
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //fechar corretamente a janela
+		janela.setUndecorated(true); //retirar bordas da janela fazendo com que esta fique fullscreen
 		janela.setVisible(true);
 		
 		Debug.Print("Janela criada");
@@ -86,7 +87,7 @@ public class Main implements Runnable{
 		
 		pausemenu = new PauseMenu();
 		
-		ui = new UserInterface(health, lifes);
+		ui = new UserInterface(health, lives);
 		
 		isRunning = true;
 		new Thread(this).start();
@@ -96,6 +97,7 @@ public class Main implements Runnable{
 		//logicas
 		if(!isPaused){
 			ninja.tick();
+			ui.tick();
 		}else{
 			pausemenu.tick();
 		}
@@ -116,12 +118,14 @@ public class Main implements Runnable{
 			//mar
 			g.setColor(new Color(0, 162, 232, 225));
 			g.fillRect(0, ZOOMHEIGHT - 11 * ZOOM, ZOOMWIDTH, 11*ZOOM);
+			
+			//user interface
+			ui.render(g);
+			
 			if(isPaused){
 				//menu de pausa
 				pausemenu.render(g);
 			}
-			//user interface
-			ui.render(g);
 		
 		g = janela.getGraphics(); //obter graficos
 		
