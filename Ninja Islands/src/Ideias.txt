@@ -4,7 +4,6 @@ Personagem
  - Personagem é um ninja;<-
  - Movimento andar para os lados;<-
  - Movimentos Saltar;<-
- - Ninja com espada na mão apertando tecla W;
  - Golpe simples através da Barra de Espaço;
  
 Cenário

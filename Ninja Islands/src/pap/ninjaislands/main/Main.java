@@ -117,7 +117,7 @@ public class Main implements Runnable{
 			
 			//mar
 			g.setColor(new Color(0, 162, 232, 225));
-			g.fillRect(0, ZOOMHEIGHT - 11 * ZOOM, ZOOMWIDTH, 11*ZOOM);
+			g.fillRect(0, gamemap.y + (10 * ZOOM), ZOOMWIDTH, ZOOMHEIGHT - gamemap.y);
 			
 			//user interface
 			ui.render(g);
