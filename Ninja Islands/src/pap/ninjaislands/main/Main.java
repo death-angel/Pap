@@ -11,6 +11,7 @@ import pap.ninjaislands.entity.Ninja;
 import pap.ninjaislands.mechanics.Controller;
 import pap.ninjaislands.mechanics.Debug;
 import pap.ninjaislands.mechanics.ImageLoad;
+import pap.ninjaislands.mechanics.Inventory;
 import pap.ninjaislands.mechanics.UserInterface;
 import pap.ninjaislands.menus.PauseMenu;
 import pap.ninjaislands.world.GameMap;
@@ -56,6 +57,7 @@ public class Main implements Runnable{
 	public static Ninja ninja;
 	public static PauseMenu pausemenu;
 	public static UserInterface ui;
+	public static Inventory inventory;
 	
 	public Main(){
 		janela = new JFrame();//inicializar
@@ -89,6 +91,8 @@ public class Main implements Runnable{
 		
 		ui = new UserInterface(health, lives);
 		
+		inventory = new Inventory();
+		
 		isRunning = true;
 		new Thread(this).start();
 	}
@@ -98,6 +102,7 @@ public class Main implements Runnable{
 		if(!isPaused){
 			ninja.tick();
 			ui.tick();
+			inventory.tick();
 		}else{
 			pausemenu.tick();
 		}
@@ -121,6 +126,8 @@ public class Main implements Runnable{
 			
 			//user interface
 			ui.render(g);
+			
+			inventory.render(g);
 			
 			if(isPaused){
 				//menu de pausa
