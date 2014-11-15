@@ -14,7 +14,7 @@ public class Inventory {
 	public int[] weapons_ammunition = new int[number_of_weapons];
 	public BufferedImage[] weapon_img = new BufferedImage[number_of_weapons];
 	
-	public int selected_weapon = 2;	
+	public int selected_weapon = 0;	
 	
 	public Inventory(){
 		//nomes das armas
@@ -38,7 +38,7 @@ public class Inventory {
 	
 	public void tick(){
 		//definir limites
-		if(selected_weapon > number_of_weapons - 1) selected_weapon = number_of_weapons;
+		if(selected_weapon > (number_of_weapons - 1)) selected_weapon = number_of_weapons - 1;
 		if(selected_weapon < 0) selected_weapon = 0;
 	}
 
@@ -47,7 +47,12 @@ public class Inventory {
 	}
 	
 	public void render(Graphics g){
-		g.drawImage(selectedWeapon(selected_weapon), Main.ui.width1/4, Main.ui.y1+Main.ZOOM, null);
+		g.drawImage(selectedWeapon(selected_weapon),
+					((Main.ui.x2 - Main.ui.x1) / 2) - ((selectedWeapon(selected_weapon).getWidth())), 
+					Main.ui.y1+Main.ZOOM, 
+					selectedWeapon(selected_weapon).getWidth() * Main.ZOOM/2, 
+					selectedWeapon(selected_weapon).getHeight() * Main.ZOOM/2,
+		null);
 	}
 	
 	

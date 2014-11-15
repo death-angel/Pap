@@ -15,26 +15,30 @@ public class Controller implements KeyListener{
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode(); //obtem o codigo da tecla pressionada 
 		
-		//andar
-		if(key == KeyEvent.VK_RIGHT){
-			Ninja.isWalking = true;
-			Ninja.dir = Ninja.charWalkSpeed;
-		}
-		
-		if(key == KeyEvent.VK_LEFT){
-			Ninja.isWalking = true;
-			Ninja.dir = -Ninja.charWalkSpeed;
-		}
-		
-		//saltar
-		if(key == KeyEvent.VK_SPACE){
-			if(!Ninja.isFalling)Ninja.isJumping = true;
-		}
-		
 		if(!Main.isPaused){
 			if(key == KeyEvent.VK_ENTER){
 					Main.isPaused = true;			
 			}
+
+			//andar
+			if(key == KeyEvent.VK_RIGHT){
+				Ninja.isWalking = true;
+				Ninja.dir = Ninja.charWalkSpeed;
+			}
+			
+			if(key == KeyEvent.VK_LEFT){
+				Ninja.isWalking = true;
+				Ninja.dir = -Ninja.charWalkSpeed;
+			}
+			
+			//saltar
+			if(key == KeyEvent.VK_SPACE){
+				if(!Ninja.isFalling)Ninja.isJumping = true;
+			}
+			
+			//mudar de arma
+			if(key == KeyEvent.VK_Q && Main.inventory.selected_weapon != 0) Main.inventory.selected_weapon -= 1;
+			if(key == KeyEvent.VK_E && Main.inventory.selected_weapon != Main.inventory.number_of_weapons-1) Main.inventory.selected_weapon += 1;
 			
 		}else if(Main.isPaused){
 			if(key == KeyEvent.VK_ENTER){

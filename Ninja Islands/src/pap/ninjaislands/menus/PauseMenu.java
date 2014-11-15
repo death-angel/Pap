@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import pap.ninjaislands.main.Main;
-import pap.ninjaislands.mechanics.Debug;
 
 public class PauseMenu {
 	
@@ -31,7 +30,6 @@ public class PauseMenu {
 					selected = false;
 				}else if(count == 1){
 					//desligar o jogo
-					Debug.Print("Aplicação fechada");
 					Main.janela.dispose();
 					System.exit(0);
 				}
