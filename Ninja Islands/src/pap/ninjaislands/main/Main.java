@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 import pap.ninjaislands.entity.Ninja;
+import pap.ninjaislands.entity.PirateZombie;
 import pap.ninjaislands.mechanics.Controller;
 import pap.ninjaislands.mechanics.ImageLoad;
 import pap.ninjaislands.mechanics.Inventory;
@@ -57,6 +58,8 @@ public class Main implements Runnable{
 	public static PauseMenu pausemenu;
 	public static UserInterface ui;
 	public static Inventory inventory;
+	//teste
+	public static PirateZombie pz;
 	
 	public Main(){
 		janela = new JFrame();//inicializar
@@ -76,6 +79,8 @@ public class Main implements Runnable{
 		pausemenu = new PauseMenu();
 		ui = new UserInterface(health, lives);
 		inventory = new Inventory();
+		//teste
+		pz = new PirateZombie(MAPX + 10, 1);
 		
 		isRunning = true;
 		new Thread(this).start();
@@ -87,6 +92,8 @@ public class Main implements Runnable{
 			ninja.tick();
 			ui.tick();
 			inventory.tick();
+			//teste
+			pz.tick();
 		}else{
 			pausemenu.tick();
 		}
@@ -103,6 +110,9 @@ public class Main implements Runnable{
 			gamemap.render(g);
 			//renderizar ninja
 			ninja.render(g);
+			
+			//teste
+			pz.render(g);
 			
 			//mar
 			g.setColor(new Color(0, 162, 232, 225));
