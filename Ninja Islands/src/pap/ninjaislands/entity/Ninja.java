@@ -18,6 +18,7 @@ public class Ninja{
 	public static double charWalkSpeed = 1.0;
 	public static int width; 
 	public static int height;
+	
 	//calculo para centrar personagem no meio do ecra
 	public static double x = Main.ZOOMWIDTH/2 - width/2;
 	public static double y = Main.ZOOMHEIGHT/2 - height/2 - 30;
@@ -32,7 +33,7 @@ public class Ninja{
 	//animação de andar
 	public int wanimation = 1;
 	public int wanimation_frame;
-	public int wanimation_time = 6;
+	public int wanimation_time = 4;
 	
 	//animação parado
 	public int sanimation = 1;
@@ -79,17 +80,17 @@ public class Ninja{
 			
 			sanimation = 0;
 			
-			//animação de andar
-			if(wanimation_frame >= wanimation_time){
-				if(wanimation > 2){
-					wanimation = 0;
+				//animação de andar
+				if(wanimation_frame >= wanimation_time){
+					if(wanimation > 2){
+						wanimation = 0;
+					}else{
+						wanimation += 1;
+					}
+					wanimation_frame = 0;
 				}else{
-					wanimation += 1;
+					wanimation_frame +=1;
 				}
-				wanimation_frame = 0;
-			}else{
-				wanimation_frame +=1;
-			}
 			
 		}else{
 			wanimation = 0;
@@ -124,18 +125,33 @@ public class Ninja{
 	
 	public void render(Graphics g){
 		if(isWalking){
-			if(dir > 0){
-				g.drawImage(ImageLoad.ninja, (int)(x+width) - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width)-width - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/*animação*/(width*wanimation), 0, width + (wanimation*width), height,null);//inverte a imagem
+			if(Main.inventory.selected_weapon == 0){
+				if(dir > 0){
+					g.drawImage(ImageLoad.ninja, (int)(x+width) - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width)-width - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/*animação*/(width*wanimation), 0, width + (wanimation*width), height,null);//inverte a imagem
+				}else{
+					g.drawImage(ImageLoad.ninja, (int)x - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width) - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/(width*wanimation), 0, width + (wanimation*width), height, null);//imagem normal
+				}
 			}else{
-				g.drawImage(ImageLoad.ninja, (int)x - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width) - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/(width*wanimation), 0, width + (wanimation*width), height, null);//imagem normal
+				if(dir > 0){
+					g.drawImage(ImageLoad.ninja, (int)(x+width) - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width)-width - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*wanimation), 2 * height, (0*width) + width + (wanimation*width), (2*height) + height,null);//inverte a imagem
+				}else{
+					g.drawImage(ImageLoad.ninja, (int)x - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width) - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*wanimation), 2 * height, (0*width) + width + (wanimation*width), (2*height) + height, null);//imagem normal
+				}
 			}
 		}else{
-			if(dir > 0){
-				g.drawImage(ImageLoad.ninja, (int)(x+width) - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width)-width - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*sanimation), 1 * height, (0*width) + width + (sanimation*width), (1*height) + height,null);//inverte a imagem
+			if(Main.inventory.selected_weapon == 0){
+				if(dir > 0){
+					g.drawImage(ImageLoad.ninja, (int)(x+width) - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width)-width - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*sanimation), 1 * height, (0*width) + width + (sanimation*width), (1*height) + height,null);//inverte a imagem
+				}else{
+					g.drawImage(ImageLoad.ninja, (int)x - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width) - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*sanimation), 1 * height, (0*width) + width + (sanimation*width), (1*height) + height, null);//imagem normal
+				}
 			}else{
-				g.drawImage(ImageLoad.ninja, (int)x - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width) - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*sanimation), 1 * height, (0*width) + width + (sanimation*width), (1*height) + height, null);//imagem normal
+				if(dir > 0){
+					g.drawImage(ImageLoad.ninja, (int)(x+width) - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width)-width - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*sanimation), 3 * height, (0*width) + width + (sanimation*width), (3*height) + height,null);//inverte a imagem
+				}else{
+					g.drawImage(ImageLoad.ninja, (int)x - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width) - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*sanimation), 3 * height, (0*width) + width + (sanimation*width), (3*height) + height, null);//imagem normal
+				}
 			}
 		}
-	}
-	
+	}	
 }

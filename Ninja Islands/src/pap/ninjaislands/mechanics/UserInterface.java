@@ -42,8 +42,7 @@ public class UserInterface {
 	int horas;
 	int count;
 	
-	//score
-	public int score = 0;
+	
 	int score_per_minute = 20; //pontos atribuidos a cada minuto
 	int score_per_hour = 1500; //pontos atribuidos a cada hora
 	
@@ -58,13 +57,13 @@ public class UserInterface {
 		if(segundos >= 60){
 			count = 0;
 			minutos += 1;
-			score += score_per_minute;
+			Score.score += score_per_minute;
 		}
 		if(minutos >= 60){
 			count = 0;
 			minutos = 0;
 			horas += 1;
-			score += score_per_hour;
+			Score.score += score_per_hour;
 		}
 		
 	}
@@ -114,7 +113,7 @@ public class UserInterface {
 		
 		//Pontuação
 		g.setColor(new Color(3, 3, 3));
-		g.drawString("Score:"+score, sX1 + 5, sY1 + (sHeight1 / 2) + Main.ZOOM);
+		g.drawString("Score:"+Score.getScore(), sX1 + 5, sY1 + (sHeight1 / 2) + Main.ZOOM);
 	}
 	
 	public void render(Graphics g){

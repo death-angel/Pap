@@ -10,17 +10,17 @@ Cenário
  - 3 ilhas; <-
  - Algumas agrupadas por pontes de madeira; <-
  - Fundo com o céu azul, sol brilhante sem nuvens;
- - Mar á volta das ilhas;
+ - Mar á volta das ilhas;<-
  - Algumas arvores;
  
 Inimigo
  - Aparecem atraves de um barco que se aproxima da ilha dos dois lados;
- - Inimigos são zombies piratas;
- - + pontos = mais velocidade dos zombies e + zombies;
+ - Inimigos são zombies piratas;<-
+ - + pontos = + zombies;<-
  - Quando se aproximam do jogador a barra de vida do jogador desce;
  - Alguns zombies quando morrem oferecem poção que aumenta um bocadinho de vida e setas para o arco;
  
 Armas
- - Zombies não conteem armas;
- - Ninja contem uma espada e arco; 
+ - Zombies não conteem armas;<-
+ - Ninja contem uma espada e arco e mao;<- 
   

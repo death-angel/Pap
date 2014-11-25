@@ -6,34 +6,43 @@ import java.awt.image.BufferedImage;
 import pap.ninjaislands.main.Main;
 import pap.ninjaislands.mechanics.Collisions;
 import pap.ninjaislands.mechanics.ImageLoad;
+import pap.ninjaislands.mechanics.Score;
 
 public class PirateZombie {
 	
 	public int model;
-	public int width = ImageLoad.pirate_zombie_model1.getWidth();
-	public int height = ImageLoad.pirate_zombie_model1.getHeight();
+	public int width = 9;
+	public int height = 22;
 	
 	public double x;
 	public double y =  Main.ZOOMHEIGHT/2 - height/2 - 30;
 	public double dir;
-	public double movement_speed = 0.5;
+	public double movement_speed;
 	public double currentFallSpeed = 0.1;
 	public double maxFallSpeed = 2.5;
 	
+	//animação de andar
+		public int wanimation = 1;
+		public int wanimation_frame;
+		public int wanimation_time = 4;
+	
 	public boolean isFalling = true;
+	public boolean isWalking = true;
 	
 	Collisions collisions;
 	
-	public PirateZombie(double x, int model){
+	public PirateZombie(double x, int model, double movement_speed){
 		this.x = x;
 		this.model = model;
+		this.movement_speed = movement_speed;
 		collisions = new Collisions();
 	}
 	
 	public void tick(){
-		
-		x += dir;
-		
+		if(isWalking){
+			x += dir;
+			walkingAnimation();
+		}
 		if(isFalling){
 			y += currentFallSpeed;
 			
@@ -55,13 +64,40 @@ public class PirateZombie {
 			isFalling = true;
 		}
 		
+		AI();
+		
+	}
+	
+	public void AI(){
 		//Basica Inteligencia artifial
-		if(x > Ninja.x){
-			dir = -movement_speed;
-		}else{
-			dir = movement_speed;
+				if(x > Ninja.x){
+					dir = -movement_speed;
+				}else{
+					dir = movement_speed;
+				}
+	}
+	
+	public boolean isDeadByWater(){
+		if(y >= (Main.gamemap.y + (10 * Main.ZOOM) + height)){
+			Score.score += 20;
+			return true;
 		}
 		
+		return false;
+	}
+	
+	public void walkingAnimation(){
+		//animação de andar
+				if(wanimation_frame >= wanimation_time){
+					if(wanimation > 2){
+						wanimation = 0;
+					}else{
+						wanimation += 1;
+					}
+					wanimation_frame = 0;
+				}else{
+					wanimation_frame +=1;
+				}
 	}
 	
 	public BufferedImage getPirateModel(int model){
@@ -71,10 +107,12 @@ public class PirateZombie {
 	}
 	
 	public void render(Graphics g){
-		if(dir > 0){
-			g.drawImage(getPirateModel(model), (int)(x+width) - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(-width), (int)height,null);
-		}else{
-			g.drawImage(getPirateModel(model), (int)x - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(width), (int)(height),null);
+		if(isWalking){
+			if(dir > 0){
+				g.drawImage(getPirateModel(model), (int)(x+width) - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width)-width - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/*animação*/(width*wanimation), 0, width + (wanimation*width), height,null);//inverte a imagem
+			}else{
+				g.drawImage(getPirateModel(model), (int)x - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width) - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/(width*wanimation), 0, width + (wanimation*width), height, null);//imagem normal
+			}
 		}
 	}
 	

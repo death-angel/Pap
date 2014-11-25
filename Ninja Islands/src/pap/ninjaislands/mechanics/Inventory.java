@@ -38,7 +38,7 @@ public class Inventory {
 	
 	public void tick(){
 		//definir limites
-		if(selected_weapon > (number_of_weapons - 1)) selected_weapon = number_of_weapons - 1;
+		if(selected_weapon > (number_of_weapons - 2)) selected_weapon = number_of_weapons - 2;
 		if(selected_weapon < 0) selected_weapon = 0;
 	}
 

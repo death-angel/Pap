@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import pap.ninjaislands.entity.Ninja;
 import pap.ninjaislands.entity.PirateZombie;
 import pap.ninjaislands.mechanics.Controller;
+import pap.ninjaislands.mechanics.GenerateEnemy;
 import pap.ninjaislands.mechanics.ImageLoad;
 import pap.ninjaislands.mechanics.Inventory;
 import pap.ninjaislands.mechanics.UserInterface;
@@ -43,7 +44,7 @@ public class Main implements Runnable{
 	private int MAPWIDTH = 188 * ZOOM;
 	private int MAPHEIGHT = 27 * ZOOM;
 	
-	private int NINJAWIDTH = 9;
+	private int NINJAWIDTH = 13;
 	private int NINJAHEIGHT = 19;
 	
 	public int health = 100;
@@ -52,14 +53,16 @@ public class Main implements Runnable{
 	public boolean isRunning = false;//estado do jogo: true = jogar false = pausa
 	public static boolean isPaused = false;
 	
+	//mar
+	public int marX = 0;
+	
 	Image screen; //vai servir para não se notar as transaçoes das frames
 	public static GameMap gamemap;
 	public static Ninja ninja;
 	public static PauseMenu pausemenu;
 	public static UserInterface ui;
 	public static Inventory inventory;
-	//teste
-	public static PirateZombie pz;
+	public static GenerateEnemy ge;
 	
 	public Main(){
 		janela = new JFrame();//inicializar
@@ -79,8 +82,7 @@ public class Main implements Runnable{
 		pausemenu = new PauseMenu();
 		ui = new UserInterface(health, lives);
 		inventory = new Inventory();
-		//teste
-		pz = new PirateZombie(MAPX + 10, 1);
+		ge = new GenerateEnemy();
 		
 		isRunning = true;
 		new Thread(this).start();
@@ -92,8 +94,8 @@ public class Main implements Runnable{
 			ninja.tick();
 			ui.tick();
 			inventory.tick();
-			//teste
-			pz.tick();
+			ge.enemyTick();
+			ge.generateEnemy();
 		}else{
 			pausemenu.tick();
 		}
@@ -111,12 +113,11 @@ public class Main implements Runnable{
 			//renderizar ninja
 			ninja.render(g);
 			
-			//teste
-			pz.render(g);
+			ge.enemyRender(g);
 			
 			//mar
 			g.setColor(new Color(0, 162, 232, 225));
-			g.fillRect(0, gamemap.y + (10 * ZOOM), ZOOMWIDTH, ZOOMHEIGHT - gamemap.y);
+			g.fillRect(marX, gamemap.y + (10 * ZOOM), ZOOMWIDTH, ZOOMHEIGHT - gamemap.y);
 			
 			//user interface
 			ui.render(g);
