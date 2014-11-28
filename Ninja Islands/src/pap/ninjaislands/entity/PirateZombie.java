@@ -33,7 +33,7 @@ public class PirateZombie {
 	//quantidade de dano
 	public int point_damage = 0;
 	public int max_point_damage = 5;
-	public int damage = 1;
+	public int damage = 3;
 	
 	public boolean isFalling = true;
 	public boolean isWalking = true;
