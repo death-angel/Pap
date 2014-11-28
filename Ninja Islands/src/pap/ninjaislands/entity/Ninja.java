@@ -40,11 +40,26 @@ public class Ninja{
 	public int sanimation_frame;
 	public int sanimation_time = 45;
 	
+	//animação andar e atacar
+	public int waanimation = 1;
+	public int waanimation_frame;
+	public int waanimation_time = 4;
+	
+	//animação parado e atacar
+	public int saanimation = 1;
+	public int saanimation_frame;
+	public int saanimation_time = 6;
+	
+	//quantidade de dano
+	public int damage = 5;
+	
 	Collisions collisions;
 	GameMap gamemap;
 	
 	public static boolean isFalling = true;
 	public static boolean isWalking = false;
+	
+	public static boolean isAttacking = false;
 	
 	public Ninja(int width, int height){
 		this.width = width;
@@ -121,35 +136,92 @@ public class Ninja{
 			}
 		}
 		
+		attackingAnimation();
+		died();
+	}
+	
+	public void died(){
+		if(Main.ui.health <= 0) Main.died = true;
+		if(collisions.isDeadOnTheOcean(this)) Main.died = true;
+	}
+	
+	public void attackingAnimation(){
+		if(isWalking && isAttacking){
+			saanimation = 0;
+			
+				//animação de andar
+				if(waanimation_frame >= waanimation_time){
+					if(waanimation > 2){
+						waanimation = 0;
+					}else{
+						waanimation += 1;
+					}
+					waanimation_frame = 0;
+				}else{
+					waanimation_frame +=1;
+				}
+			
+		}else if(isAttacking){
+			waanimation = 0;
+			if(!isJumping){
+				//animação de parado
+				if(saanimation_frame >= saanimation_time){
+					if(saanimation > 1){
+						saanimation = 1;
+					}else{
+						saanimation += 1;
+					}
+					saanimation_frame = 0;
+				}else{
+					saanimation_frame +=1;
+				}
+			}
+		}
 	}
 	
 	public void render(Graphics g){
 		if(isWalking){
-			if(Main.inventory.selected_weapon == 0){
+			if(isAttacking){
 				if(dir > 0){
-					g.drawImage(ImageLoad.ninja, (int)(x+width) - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width)-width - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/*animação*/(width*wanimation), 0, width + (wanimation*width), height,null);//inverte a imagem
+					g.drawImage(ImageLoad.ninja, (int)(x+width) - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width)-width - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*waanimation), 4 * height, (0*width) + width + (waanimation*width), (4*height) + height,null);//inverte a imagem
 				}else{
-					g.drawImage(ImageLoad.ninja, (int)x - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width) - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/(width*wanimation), 0, width + (wanimation*width), height, null);//imagem normal
+					g.drawImage(ImageLoad.ninja, (int)x - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width) - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*waanimation), 4 * height, (0*width) + width + (waanimation*width), (4*height) + height, null);//imagem normal
 				}
 			}else{
-				if(dir > 0){
-					g.drawImage(ImageLoad.ninja, (int)(x+width) - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width)-width - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*wanimation), 2 * height, (0*width) + width + (wanimation*width), (2*height) + height,null);//inverte a imagem
+				if(Main.inventory.selected_weapon == 0){
+					if(dir > 0){
+						g.drawImage(ImageLoad.ninja, (int)(x+width) - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width)-width - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/*animação*/(width*wanimation), 0, width + (wanimation*width), height,null);//inverte a imagem
+					}else{
+						g.drawImage(ImageLoad.ninja, (int)x - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width) - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/(width*wanimation), 0, width + (wanimation*width), height, null);//imagem normal
+					}
 				}else{
-					g.drawImage(ImageLoad.ninja, (int)x - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width) - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*wanimation), 2 * height, (0*width) + width + (wanimation*width), (2*height) + height, null);//imagem normal
+					if(dir > 0){
+						g.drawImage(ImageLoad.ninja, (int)(x+width) - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width)-width - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*wanimation), 2 * height, (0*width) + width + (wanimation*width), (2*height) + height,null);//inverte a imagem
+					}else{
+						g.drawImage(ImageLoad.ninja, (int)x - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width) - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*wanimation), 2 * height, (0*width) + width + (wanimation*width), (2*height) + height, null);//imagem normal
+					}
 				}
 			}
 		}else{
-			if(Main.inventory.selected_weapon == 0){
+			if(isAttacking){
 				if(dir > 0){
-					g.drawImage(ImageLoad.ninja, (int)(x+width) - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width)-width - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*sanimation), 1 * height, (0*width) + width + (sanimation*width), (1*height) + height,null);//inverte a imagem
+					g.drawImage(ImageLoad.ninja, (int)(x+width) - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width)-width - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*saanimation), 5 * height, (0*width) + width + (saanimation*width), (5*height) + height,null);//inverte a imagem
 				}else{
-					g.drawImage(ImageLoad.ninja, (int)x - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width) - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*sanimation), 1 * height, (0*width) + width + (sanimation*width), (1*height) + height, null);//imagem normal
+					g.drawImage(ImageLoad.ninja, (int)x - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width) - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*saanimation), 5 * height, (0*width) + width + (saanimation*width), (5*height) + height, null);//imagem normal
 				}
 			}else{
-				if(dir > 0){
-					g.drawImage(ImageLoad.ninja, (int)(x+width) - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width)-width - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*sanimation), 3 * height, (0*width) + width + (sanimation*width), (3*height) + height,null);//inverte a imagem
+				if(Main.inventory.selected_weapon == 0){
+					if(dir > 0){
+						g.drawImage(ImageLoad.ninja, (int)(x+width) - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width)-width - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*sanimation), 1 * height, (0*width) + width + (sanimation*width), (1*height) + height,null);//inverte a imagem
+					}else{
+						g.drawImage(ImageLoad.ninja, (int)x - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width) - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*sanimation), 1 * height, (0*width) + width + (sanimation*width), (1*height) + height, null);//imagem normal
+					}
 				}else{
-					g.drawImage(ImageLoad.ninja, (int)x - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width) - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*sanimation), 3 * height, (0*width) + width + (sanimation*width), (3*height) + height, null);//imagem normal
+					if(dir > 0){
+						g.drawImage(ImageLoad.ninja, (int)(x+width) - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width)-width - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*sanimation), 3 * height, (0*width) + width + (sanimation*width), (3*height) + height,null);//inverte a imagem
+					}else{
+						g.drawImage(ImageLoad.ninja, (int)x - (int)Main.OFFSETX, (int)y - (int)Main.OFFSETY, (int)(x+width) - (int)Main.OFFSETX, (int)(y+height) - (int)Main.OFFSETY,/**/0*width+(width*sanimation), 3 * height, (0*width) + width + (sanimation*width), (3*height) + height, null);//imagem normal
+					}
 				}
 			}
 		}

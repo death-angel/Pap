@@ -61,4 +61,30 @@ public class Collisions {
 		return distance;
 	}
 	
+	public boolean isBeingAttackedByZombies(PirateZombie pzombie, Ninja ninja){
+		//lado esquerdo
+		if(ninja.x <= (pzombie.x + pzombie.width) && (ninja.x+ninja.width) >= (pzombie.x + pzombie.width)) return true;
+		//lado direito
+		if((ninja.x+ninja.width) >= pzombie.x && ninja.x <= pzombie.x) return true;
+				
+		return false;
+	}
+	
+	public boolean isBeingAttackedByNinjas(PirateZombie pzombie, Ninja ninja){
+		//lado esquerdo
+		if(pzombie.x <= (ninja.x + ninja.width) && (pzombie.x+pzombie.width) >= (ninja.x + ninja.width)) return true;
+		//lado direito
+		if((pzombie.x+pzombie.width) >= ninja.x && pzombie.x <= ninja.x) return true;
+		
+		return false;
+	}
+	
+	public boolean isDeadOnTheOcean(Ninja ninja){
+		if(ninja.y >= (Main.gamemap.y + (10 * Main.ZOOM) + ninja.height)){
+			return true;
+		}
+		
+		return false;
+	}
+	
 }

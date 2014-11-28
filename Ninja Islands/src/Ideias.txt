@@ -4,7 +4,7 @@ Personagem
  - Personagem é um ninja;<-
  - Movimento andar para os lados;<-
  - Movimentos Saltar;<-
- - Golpe simples através da Barra de Espaço;
+ - Golpe simples através da Barra de Espaço;<-
  
 Cenário
  - 3 ilhas; <-
@@ -17,7 +17,7 @@ Inimigo
  - Aparecem atraves de um barco que se aproxima da ilha dos dois lados;
  - Inimigos são zombies piratas;<-
  - + pontos = + zombies;<-
- - Quando se aproximam do jogador a barra de vida do jogador desce;
+ - Quando se aproximam do jogador a barra de vida do jogador desce;<-
  - Alguns zombies quando morrem oferecem poção que aumenta um bocadinho de vida e setas para o arco;
  
 Armas

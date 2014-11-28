@@ -14,6 +14,7 @@ import pap.ninjaislands.mechanics.GenerateEnemy;
 import pap.ninjaislands.mechanics.ImageLoad;
 import pap.ninjaislands.mechanics.Inventory;
 import pap.ninjaislands.mechanics.UserInterface;
+import pap.ninjaislands.menus.GameOver;
 import pap.ninjaislands.menus.PauseMenu;
 import pap.ninjaislands.world.GameMap;
 
@@ -25,7 +26,7 @@ public class Main implements Runnable{
 
 	public static JFrame janela;
 	
-	private String nome = "Ninja vs Zombie Pirates - Pre-Alpha - 0.3.0.2";
+	private String nome = "Ninja vs Zombie Pirates - Alpha - 0.5.0";
 	
 	//comprimento do ecra
 	public static int WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
@@ -48,10 +49,11 @@ public class Main implements Runnable{
 	private int NINJAHEIGHT = 19;
 	
 	public int health = 100;
-	public int lives = 3;
+	public int lives = 1;
 	
 	public boolean isRunning = false;//estado do jogo: true = jogar false = pausa
 	public static boolean isPaused = false;
+	public static boolean died = false;
 	
 	//mar
 	public int marX = 0;
@@ -63,6 +65,7 @@ public class Main implements Runnable{
 	public static UserInterface ui;
 	public static Inventory inventory;
 	public static GenerateEnemy ge;
+	public static GameOver go;
 	
 	public Main(){
 		janela = new JFrame();//inicializar
@@ -83,6 +86,7 @@ public class Main implements Runnable{
 		ui = new UserInterface(health, lives);
 		inventory = new Inventory();
 		ge = new GenerateEnemy();
+		go = new GameOver();
 		
 		isRunning = true;
 		new Thread(this).start();
@@ -90,14 +94,18 @@ public class Main implements Runnable{
 	
 	public void tick(){
 		//logicas
-		if(!isPaused){
-			ninja.tick();
-			ui.tick();
-			inventory.tick();
-			ge.enemyTick();
-			ge.generateEnemy();
+		if(!died){
+			if(!isPaused){
+				ninja.tick();
+				ui.tick();
+				inventory.tick();
+				ge.enemyTick();
+				ge.generateEnemy();
+			}else{
+				pausemenu.tick();
+			}
 		}else{
-			pausemenu.tick();
+			go.tick();
 		}
 	}
 	
@@ -124,9 +132,13 @@ public class Main implements Runnable{
 			
 			inventory.render(g);
 			
-			if(isPaused){
+			if(isPaused && !died){
 				//menu de pausa
 				pausemenu.render(g);
+			}
+			
+			if(died){
+				go.render(g);
 			}
 		
 		g = janela.getGraphics(); //obter graficos

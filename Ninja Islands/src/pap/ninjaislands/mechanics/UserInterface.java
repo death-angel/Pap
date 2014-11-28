@@ -8,7 +8,7 @@ import pap.ninjaislands.main.Main;
 
 public class UserInterface {
 
-	int health;
+	public int health;
 	int lifes; //vidas que o ninja tem
 	
 	//coordenadas e tamanhos para os retangulos da interface de Jogador

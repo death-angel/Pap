@@ -50,7 +50,7 @@ public class GenerateEnemy{
 	
 	public void removeDeadZombies(){
 		for(PirateZombie pz : pz_list){
-			if(pz.isDeadByWater()){
+			if(pz.isDeadByWater() || pz.health <= 0){
 				pz_list.remove(pz);
 			}
 		}

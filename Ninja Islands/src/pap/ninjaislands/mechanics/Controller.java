@@ -40,6 +40,16 @@ public class Controller implements KeyListener{
 			if(key == KeyEvent.VK_Q && Main.inventory.selected_weapon != 0) Main.inventory.selected_weapon -= 1;
 			if(key == KeyEvent.VK_E && Main.inventory.selected_weapon != Main.inventory.number_of_weapons-1) Main.inventory.selected_weapon += 1;
 			
+			//atacar
+			
+			if((key == KeyEvent.VK_A) || (key == KeyEvent.VK_S) || (key == KeyEvent.VK_D)) {
+				if(Main.inventory.selected_weapon == 1)	Main.ninja.isAttacking = true;
+			}
+			
+			if(key == KeyEvent.VK_ESCAPE){
+				if(Main.died) Main.go.exited = true;
+			}
+			
 		}else if(Main.isPaused){
 			if(key == KeyEvent.VK_ENTER){
 					Main.pausemenu.selected = true;
@@ -65,6 +75,10 @@ public class Controller implements KeyListener{
 		
 		if(key == KeyEvent.VK_LEFT){
 			Ninja.isWalking = false;
+		}
+		
+		if((key == KeyEvent.VK_A) || (key == KeyEvent.VK_S) || (key == KeyEvent.VK_D)) {
+			if(Main.inventory.selected_weapon == 1)	Main.ninja.isAttacking = false;
 		}
 	}
 

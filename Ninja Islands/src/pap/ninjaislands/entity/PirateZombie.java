@@ -2,6 +2,7 @@ package pap.ninjaislands.entity;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 import pap.ninjaislands.main.Main;
 import pap.ninjaislands.mechanics.Collisions;
@@ -25,6 +26,14 @@ public class PirateZombie {
 		public int wanimation = 1;
 		public int wanimation_frame;
 		public int wanimation_time = 4;
+		
+	//vida do zombie	
+	public int health = 100;
+	
+	//quantidade de dano
+	public int point_damage = 0;
+	public int max_point_damage = 5;
+	public int damage = 1;
 	
 	public boolean isFalling = true;
 	public boolean isWalking = true;
@@ -65,7 +74,8 @@ public class PirateZombie {
 		}
 		
 		AI();
-		
+		attacked();
+		attacking();
 	}
 	
 	public void AI(){
@@ -75,6 +85,28 @@ public class PirateZombie {
 				}else{
 					dir = movement_speed;
 				}
+	}
+	
+	public void attacked(){
+		if(Main.ninja.isAttacking && collisions.isBeingAttackedByNinjas(this, Main.ninja)){
+			health -= Main.ninja.damage;
+		}
+		
+		if(health <= 0) Score.score += 30;
+	}
+	
+	public void attacking(){
+		int side = new Random().nextInt(100);
+		
+		if(side/3 < 5 && collisions.isBeingAttackedByNinjas(this, Main.ninja) && !Main.ninja.isJumping){
+			point_damage += 1;
+		}
+		
+		if(point_damage >= max_point_damage){
+			Main.ui.health -= damage;
+			point_damage = 0;
+		}
+		
 	}
 	
 	public boolean isDeadByWater(){
