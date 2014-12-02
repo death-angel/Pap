@@ -24,7 +24,7 @@ public class GameOver {
 			
 			g.setColor(Color.WHITE);
 			g.drawString("You died! Score:"+Score.score, Main.ZOOMWIDTH/2 - (16*12)/5, Main.ZOOMHEIGHT/2 - (7*2));
-			g.drawString("Press ESC to exit the game", Main.ZOOMWIDTH/2 - (26*12)/5, Main.ZOOMHEIGHT/2 - (7));
+			g.drawString("Press ENTER to exit the game", Main.ZOOMWIDTH/2 - (26*12)/5, Main.ZOOMHEIGHT/2 - (7));
 		}
 	}
 	

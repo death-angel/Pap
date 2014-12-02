@@ -14,7 +14,7 @@ public class GenerateEnemy{
 	private int level = 1;
 	private int g_start = 0;
 	private int g_max = 8000;
-	private int gl_count = g_max / level;
+	private int gl_count = g_max;
 	
 	private int side1 = Main.gamemap.x + 10;
 	private int side2 = Main.gamemap.x + Main.gamemap.width - 10;
@@ -48,12 +48,15 @@ public class GenerateEnemy{
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void removeDeadZombies(){
+		LinkedList<PirateZombie> clone = (LinkedList<PirateZombie>) pz_list.clone(); 
 		for(PirateZombie pz : pz_list){
 			if(pz.isDeadByWater() || pz.health <= 0){
-				pz_list.remove(pz);
+				clone.remove(pz);
 			}
 		}
+		pz_list = (LinkedList<PirateZombie>) clone.clone();
 	}
 	
 	public void enemyTick(){

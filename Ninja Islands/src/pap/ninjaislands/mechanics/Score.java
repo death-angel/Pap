@@ -3,7 +3,7 @@ package pap.ninjaislands.mechanics;
 public class Score {
 	
 	public static int score = 0;
-	public int score_per_level = 40;
+	public int score_per_level = 7;
 	
 	public static int getScore(){
 		return score;

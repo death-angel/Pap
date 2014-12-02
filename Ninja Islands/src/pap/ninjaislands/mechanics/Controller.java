@@ -32,7 +32,7 @@ public class Controller implements KeyListener{
 			}
 			
 			//saltar
-			if(key == KeyEvent.VK_SPACE){
+			if(key == KeyEvent.VK_UP){
 				if(!Ninja.isFalling)Ninja.isJumping = true;
 			}
 			
@@ -42,11 +42,11 @@ public class Controller implements KeyListener{
 			
 			//atacar
 			
-			if((key == KeyEvent.VK_A) || (key == KeyEvent.VK_S) || (key == KeyEvent.VK_D)) {
+			if(key == KeyEvent.VK_SPACE) {
 				if(Main.inventory.selected_weapon == 1)	Main.ninja.isAttacking = true;
 			}
 			
-			if(key == KeyEvent.VK_ESCAPE){
+			if(key == KeyEvent.VK_ENTER){
 				if(Main.died) Main.go.exited = true;
 			}
 			
@@ -77,7 +77,7 @@ public class Controller implements KeyListener{
 			Ninja.isWalking = false;
 		}
 		
-		if((key == KeyEvent.VK_A) || (key == KeyEvent.VK_S) || (key == KeyEvent.VK_D)) {
+		if(key == KeyEvent.VK_SPACE){
 			if(Main.inventory.selected_weapon == 1)	Main.ninja.isAttacking = false;
 		}
 	}
