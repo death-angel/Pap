@@ -70,6 +70,8 @@ public class UserInterface {
 	
 	public void tick(){
 		timer();
+		if(health >= 100) health = 100;
+		if(health <= 0) health = 0;
 	}
 	
 	public void renderPlayerUI(Graphics g){

@@ -19,6 +19,8 @@ public class GenerateEnemy{
 	private int side1 = Main.gamemap.x + 10;
 	private int side2 = Main.gamemap.x + Main.gamemap.width - 10;
 	
+	private int zombies_limit = 4;
+	
 	Score score = new Score();
 	
 	public GenerateEnemy(){
@@ -33,15 +35,17 @@ public class GenerateEnemy{
 		double maxSpeed = 1.0;
 		double speed = minSpeed + (maxSpeed - minSpeed) * speedRandom;
 		
-		if(g_start <= (int)(gl_count/score.getLevel())){
-			g_start += 1;
-		}else{
-			if(side == 0){
-				pz_list.add(new PirateZombie(side1, 1, speed));
+		if(pz_list.size() < zombies_limit){
+			if(g_start <= (int)(gl_count/score.getLevel())){
+				g_start += 1;
 			}else{
-				pz_list.add(new PirateZombie(side2, 1, speed));
+				if(side == 0){
+					pz_list.add(new PirateZombie(side1, 1, speed));
+				}else{
+					pz_list.add(new PirateZombie(side2, 1, speed));
+				}
+				g_start = 0;
 			}
-			g_start = 0;
 		}
 		
 		removeDeadZombies();

@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import pap.ninjaislands.main.Main;
 import pap.ninjaislands.mechanics.Collisions;
 import pap.ninjaislands.mechanics.ImageLoad;
+import pap.ninjaislands.mechanics.Score;
 import pap.ninjaislands.world.GameMap;
 
 public class Ninja{
@@ -138,6 +139,15 @@ public class Ninja{
 		
 		attackingAnimation();
 		died();
+		recoverlife();
+	}
+	
+	public int getHealth(){
+		return Main.ui.health;
+	}
+	
+	public void recoverlife(){
+		if(getHealth() >= 95 && Score.getScore() >= 500) Main.ui.health += 1; 
 	}
 	
 	public void died(){

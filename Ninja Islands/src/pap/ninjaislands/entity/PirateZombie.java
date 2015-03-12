@@ -16,7 +16,7 @@ public class PirateZombie {
 	public int height = 22;
 	
 	public double x;
-	public double y =  Main.ZOOMHEIGHT/2 - height/2 - 30;
+	public double y =  Main.ZOOMHEIGHT/2 - height/2;
 	public double dir;
 	public double movement_speed;
 	public double currentFallSpeed = 0.1;
@@ -37,6 +37,7 @@ public class PirateZombie {
 	
 	public boolean isFalling = true;
 	public boolean isWalking = true;
+	public boolean isAttacking = false;
 	
 	Collisions collisions;
 	
@@ -90,6 +91,12 @@ public class PirateZombie {
 	public void attacked(){
 		if(Main.ninja.isAttacking && collisions.isBeingAttackedByNinjas(this, Main.ninja)){
 			health -= Main.ninja.damage;
+			int lucky = new Random().nextInt(100);
+			if(x >= Main.ninja.x){
+				if(lucky >= 80)x += 2.2;
+			}else{
+				if(lucky >= 80)x -= 2.2;
+			}
 		}
 		
 		if(health <= 0) Score.score += 30;

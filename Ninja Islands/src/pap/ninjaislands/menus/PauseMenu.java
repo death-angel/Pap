@@ -14,8 +14,8 @@ public class PauseMenu {
 	public static boolean selected = false;
 	
 	public PauseMenu(){
-		menu[0] = "Continuar";
-		menu[1] = "Sair";
+		menu[0] = "Continue";
+		menu[1] = "Exit";
 	}
 	
 	public void tick(){
