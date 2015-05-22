@@ -13,13 +13,13 @@ public class GenerateEnemy{
 	
 	private int level = 1;
 	private int g_start = 0;
-	private int g_max = 8000;
+	private int g_max = 5000;
 	private int gl_count = g_max;
 	
 	private int side1 = Main.gamemap.x + 10;
 	private int side2 = Main.gamemap.x + Main.gamemap.width - 10;
 	
-	private int zombies_limit = 4;
+	private int zombies_limit = 20;
 	
 	Score score = new Score();
 	

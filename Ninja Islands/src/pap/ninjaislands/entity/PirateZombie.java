@@ -4,7 +4,10 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+import javax.sound.sampled.Clip;
+
 import pap.ninjaislands.main.Main;
+import pap.ninjaislands.mechanics.Audio;
 import pap.ninjaislands.mechanics.Collisions;
 import pap.ninjaislands.mechanics.ImageLoad;
 import pap.ninjaislands.mechanics.Score;
@@ -39,16 +42,24 @@ public class PirateZombie {
 	public boolean isWalking = true;
 	public boolean isAttacking = false;
 	
+	private int secondsAudio = 0;
+	private int pauseAudio;
+	
 	Collisions collisions;
+	
+	Audio audio = new Audio();
+	Clip zombie = audio.loadAudio("zombie.wav");
 	
 	public PirateZombie(double x, int model, double movement_speed){
 		this.x = x;
 		this.model = model;
 		this.movement_speed = movement_speed;
 		collisions = new Collisions();
+		pauseAudio = new Random().nextInt(5);
 	}
 	
 	public void tick(){
+		secondsAudio++;
 		if(isWalking){
 			x += dir;
 			walkingAnimation();
@@ -72,6 +83,12 @@ public class PirateZombie {
 			
 		}else{
 			isFalling = true;
+		}
+		
+		if(!zombie.isRunning() && (secondsAudio / 60) > pauseAudio){
+			zombie.start();
+			zombie.setFramePosition(0);
+			secondsAudio = 0;
 		}
 		
 		AI();

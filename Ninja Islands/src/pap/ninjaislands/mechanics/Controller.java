@@ -3,6 +3,8 @@ package pap.ninjaislands.mechanics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.sound.sampled.Clip;
+
 import pap.ninjaislands.entity.Ninja;
 import pap.ninjaislands.main.Main;
 
@@ -11,6 +13,9 @@ public class Controller implements KeyListener{
 	/*
 	 * @autor Carlos Almeida
 	 */
+	
+	Audio audio = new Audio();
+	Clip saltar = audio.loadAudio("saltar.wav");
 	
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode(); //obtem o codigo da tecla pressionada 
@@ -33,7 +38,12 @@ public class Controller implements KeyListener{
 			
 			//saltar
 			if(key == KeyEvent.VK_UP){
-				if(!Ninja.isFalling)Ninja.isJumping = true;
+				if(!Ninja.isFalling){
+					Ninja.isJumping = true;
+					saltar.start();
+					saltar.setFramePosition(0);
+				}
+				
 			}
 			
 			//mudar de arma
@@ -43,7 +53,9 @@ public class Controller implements KeyListener{
 			//atacar
 			
 			if(key == KeyEvent.VK_SPACE) {
-				if(Main.inventory.selected_weapon == 1)	Main.ninja.isAttacking = true;
+				if(Main.inventory.selected_weapon == 1)	{
+					Main.ninja.isAttacking = true;
+				}
 			}
 			
 			if(key == KeyEvent.VK_ENTER){

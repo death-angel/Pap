@@ -2,7 +2,10 @@ package pap.ninjaislands.entity;
 
 import java.awt.Graphics;
 
+import javax.sound.sampled.Clip;
+
 import pap.ninjaislands.main.Main;
+import pap.ninjaislands.mechanics.Audio;
 import pap.ninjaislands.mechanics.Collisions;
 import pap.ninjaislands.mechanics.ImageLoad;
 import pap.ninjaislands.mechanics.Score;
@@ -53,6 +56,9 @@ public class Ninja{
 	
 	//quantidade de dano
 	public int damage = 5;
+	
+	Audio audio = new Audio();
+	Clip espada = audio.loadAudio("sword.wav");
 	
 	Collisions collisions;
 	GameMap gamemap;
@@ -147,7 +153,7 @@ public class Ninja{
 	}
 	
 	public void recoverlife(){
-		if(getHealth() >= 95 && Score.getScore() >= 500) Main.ui.health += 1; 
+		if(getHealth() >= 97 && Score.getScore() >= 500) Main.ui.health += 1; 
 	}
 	
 	public void died(){
@@ -158,6 +164,10 @@ public class Ninja{
 	public void attackingAnimation(){
 		if(isWalking && isAttacking){
 			saanimation = 0;
+			if(!espada.isRunning()){
+				espada.start();
+				espada.setFramePosition(0);
+			}
 			
 				//animação de andar
 				if(waanimation_frame >= waanimation_time){
@@ -173,6 +183,10 @@ public class Ninja{
 			
 		}else if(isAttacking){
 			waanimation = 0;
+			if(!espada.isRunning()){
+				espada.start();
+				espada.setFramePosition(0);
+			}
 			if(!isJumping){
 				//animação de parado
 				if(saanimation_frame >= saanimation_time){
@@ -185,7 +199,7 @@ public class Ninja{
 				}else{
 					saanimation_frame +=1;
 				}
-			}
+			}	
 		}
 	}
 	

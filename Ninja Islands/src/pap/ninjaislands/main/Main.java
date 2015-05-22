@@ -5,10 +5,12 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 
+import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
 
 import pap.ninjaislands.entity.Ninja;
 import pap.ninjaislands.entity.PirateZombie;
+import pap.ninjaislands.mechanics.Audio;
 import pap.ninjaislands.mechanics.Controller;
 import pap.ninjaislands.mechanics.GenerateEnemy;
 import pap.ninjaislands.mechanics.ImageLoad;
@@ -67,6 +69,10 @@ public class Main implements Runnable{
 	public static GenerateEnemy ge;
 	public static GameOver go;
 	
+	Audio audio = new Audio();
+	Clip oceano = audio.loadAudio("oceano.wav");
+	Clip mfundo = audio.loadAudio("background.wav");
+	
 	public Main(){
 		janela = new JFrame();//inicializar
 		janela.setTitle(nome); //definir nome da janela 
@@ -101,6 +107,16 @@ public class Main implements Runnable{
 				inventory.tick();
 				ge.enemyTick();
 				ge.generateEnemy();
+				//som do oceano
+				if(!oceano.isRunning()){
+					oceano.start();
+					oceano.setFramePosition(0);
+				}
+				//som de fundo
+				if(!mfundo.isRunning()){
+					mfundo.start();
+					mfundo.setFramePosition(0);
+				}
 			}else{
 				pausemenu.tick();
 			}
