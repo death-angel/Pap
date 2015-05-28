@@ -79,6 +79,12 @@ public class Collisions {
 		return false;
 	}
 	
+	public boolean isBeingAttackedBySuperPower(PirateZombie pzombie){
+		if((pzombie.y+pzombie.height) > Ninja.raioY && (pzombie.x >= (Ninja.raioXC - pzombie.width)) && (pzombie.x <= (Ninja.raioXC+Ninja.raioWidth))) return true;
+		
+		return false;
+	}
+	
 	public boolean isDeadOnTheOcean(Ninja ninja){
 		if(ninja.y >= (Main.gamemap.y + (10 * Main.ZOOM) + ninja.height)){
 			return true;

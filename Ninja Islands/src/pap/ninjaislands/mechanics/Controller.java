@@ -26,12 +26,12 @@ public class Controller implements KeyListener{
 			}
 
 			//andar
-			if(key == KeyEvent.VK_RIGHT){
+			if(key == KeyEvent.VK_RIGHT && !Ninja.superAttack){
 				Ninja.isWalking = true;
 				Ninja.dir = Ninja.charWalkSpeed;
 			}
 			
-			if(key == KeyEvent.VK_LEFT){
+			if(key == KeyEvent.VK_LEFT && !Ninja.superAttack){
 				Ninja.isWalking = true;
 				Ninja.dir = -Ninja.charWalkSpeed;
 			}
@@ -73,6 +73,14 @@ public class Controller implements KeyListener{
 			
 			if(key == KeyEvent.VK_DOWN){
 				Main.pausemenu.count += 1;
+			}
+		}
+		
+		if(key == KeyEvent.VK_S){
+			if(Score.getScore() >= 5000 && Score.currentSuperAttack < Score.maxSuperAttack){
+				Main.ninja.superAttack = true;
+				Main.ninja.isWalking = false;
+				Main.ninja.isJumping = false;
 			}
 		}
 		

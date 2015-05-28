@@ -1,6 +1,7 @@
 package pap.ninjaislands.entity;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
@@ -116,7 +117,11 @@ public class PirateZombie {
 			}
 		}
 		
-		if(health <= 0) Score.score += 30;
+		if(health <= 0) Score.score += 50;
+		
+		if(Ninja.superAttack && collisions.isBeingAttackedBySuperPower(this) && Ninja.superanimation > 2){
+			health = 0;
+		}
 	}
 	
 	public void attacking(){
